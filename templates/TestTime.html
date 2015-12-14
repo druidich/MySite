@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block scripts %}
+    {{ super() }}
+    {{ moment.include_moment() }}
+{% endblock %}
+
+{% block page_content %}
+    <p><h1>The local date and time is {{ moment(current_time).format('LLL') }}.</h1></p>
+    <p><h1>That was {{ moment(current_time).fromNow(refresh=True) }}</h1></p>
+{% endblock %}
