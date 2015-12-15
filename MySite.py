@@ -1,4 +1,4 @@
-from flask import Flask, request, make_response, redirect, abort, render_template
+from flask import Flask, request, make_response, redirect, abort, render_template, session, url_for, flash
 from flask.ext.script import Manager
 from flask.ext.bootstrap import Bootstrap
 from flask.ext.moment import Moment
@@ -21,12 +21,15 @@ app.config['SECRET_KEY'] = secretKey
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    name = None
     form = TestForm()
     if form.validate_on_submit():
-        name = form.name.data
+        old_name = session.get('name')
+        if old_name is not None and old_name != form.name.data:
+            flash('Looks like you have changed you name')
+        session['name'] = form.name.data
         form.name.data = ''
-    return render_template('test.html', form=form, name=name)
+        return redirect(url_for('index'))
+    return render_template('test.html', form=form, name=session.get('name'))
 
 
 @app.errorhandler(404)
