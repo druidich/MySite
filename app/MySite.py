@@ -1,28 +1,9 @@
-from flask import Flask, request, make_response, redirect, abort, render_template, session, url_for, flash
-from flask.ext.script import Manager
-from flask.ext.bootstrap import Bootstrap
-from flask.ext.moment import Moment
-from flask.ext.sqlalchemy import SQLAlchemy
-import config
+from flask import redirect, render_template, session, url_for
+from app import db, app, manager,bootstrap,moment
 # from model import User
-from TestForm import TestForm
+from app.TestForm import TestForm
+from app.model import User
 
-app = Flask(__name__)
-app.config.from_object(config)
-db = SQLAlchemy(app)
-manager = Manager(app)
-bootstrap = Bootstrap(app)
-moment = Moment(app)
-from model import User
-
-# class User(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     username = db.Column(db.String(64), unique=True, index=True)
-#     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
-#
-#     def __repr__(self):
-#         return '<User %r>' % self.username
-#
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -49,7 +30,3 @@ def page_not_found(e):
 @app.errorhandler(500)
 def internal_server_error(e):
     return render_template('500.html'), 500
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
