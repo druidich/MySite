@@ -1,9 +1,8 @@
 from flask import redirect, render_template, session, url_for
-from app import db, app, manager,bootstrap,moment
+from app import db, manager,bootstrap,moment, create_app
 # from model import User
 from app.TestForm import TestForm
 from app.model import User
-
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
