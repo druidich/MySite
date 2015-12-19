@@ -1,4 +1,4 @@
-from app.MySite import db
+from app import db
 
 
 class Role(db.Model):
