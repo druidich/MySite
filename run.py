@@ -24,3 +24,10 @@ def test():
 if __name__ == '__main__':
     # manager.run()
     app.run()
+
+@manager.command
+def test():
+    """Run unitest"""
+    import unittest
+    test = unittest.TestLoader().discover('tests')
+    unittest.TextTestRunner(verbosity=2).run(test)
