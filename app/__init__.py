@@ -6,14 +6,17 @@ from flask.ext.script import Manager
 from config import config
 from flask.ext.login import LoginManager
 
+# app = Flask(__name__)
 db = SQLAlchemy()
+
 manager = Manager()
 bootstrap = Bootstrap()
 moment = Moment()
 
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
-# login_manager.login_view = 'auth/login'
+login_manager.login_view = 'auth/login'
+# login_manager.init_app(app)
 
 
 def create_app(configname):
