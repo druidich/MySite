@@ -9,7 +9,7 @@ from flask.ext.login import LoginManager
 # app = Flask(__name__)
 db = SQLAlchemy()
 
-manager = Manager()
+# manager = Manager()
 bootstrap = Bootstrap()
 moment = Moment()
 
