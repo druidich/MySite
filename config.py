@@ -13,6 +13,14 @@ class Config:
 
     FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
 
+    #email setting
+    FLASKY_MAIL_SUBJECT_PREFIX = '[Flasky]'
+    MAIL_SERVER = 'email.yandex.ru'
+    FLASKY_MAIL_SENDER = 'Flasky Admin email server '
+    MAIL_PORT = 587
+    MAIL_USE_TLS = True
+    MAIL_USERNAME = os.environ.get('tests.testovich@yandex.ru')
+    MAIL_PASSWORD = os.environ.get('testSite')
     @staticmethod
     def init_app(app):
         pass

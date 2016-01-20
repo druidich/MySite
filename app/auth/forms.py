@@ -24,6 +24,6 @@ class RegistrationForm(Form):
         if User.query.filter_by(email=field.data).first():
             raise ValidationError('Email already registred.')
 
-    def validate_username(self,field):
-        if User.query.filter_by(username = field.data).first():
+    def validate_username(self, field):
+        if User.query.filter_by(username=field.data).first():
             raise ValidationError('User name is use.')
