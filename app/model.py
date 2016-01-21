@@ -1,19 +1,46 @@
 from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask.ext.login import UserMixin
+from flask.ext.login import UserMixin, AnonymousUserMixin
 from flask import current_app
 from app import login_manager
 from itsdangerous import TimedJSONWebSignatureSerializer as Seriliazer
+
+
+class Permission:
+    FOLLOW = 0x01
+    COMMENT = 0x02
+    WRITE_ARTICLES = 0x04
+    MODERATE_COMMENT = 0x08
+    ADMINISTER = 0x80
 
 
 class Role(db.Model):
     __tablename__ = 'roles'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), unique=True)
+    default = db.Column(db.Boolean, default=False, index=True)
+    permissions = db.Column(db.Integer)
     users = db.relationship('User', backref='role', lazy='dynamic')
 
     def __repr__(self):
         return '<Role %r>' % self.name
+
+    @staticmethod
+    def insert_roles():
+        roles = {
+            'User': (Permission.FOLLOW | Permission.COMMENT | Permission.WRITE_ARTICLES, True),
+            'Moderator': (
+                Permission.FOLLOW | Permission.COMMENT | Permission.WRITE_ARTICLES | Permission.MODERATE_COMMENT, False),
+            'Administrate': (0xff, False)
+        }
+        for r in roles:
+            role = Role.query.filter_by(name=r).first()
+            if role in None:
+                role = Role(name=r)
+            role.permissions = roles[r][0]
+            role.default = roles[r][1]
+            db.session.add(role)
+        db.session.commit()
 
 
 class User(UserMixin, db.Model):
@@ -25,6 +52,14 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     confirmed = db.Column(db.Boolean, default=False)
 
+    def __init__(self, **kwargs):
+        super(User, self).__init__(**kwargs)
+        if self.role is None:
+            if self.email == current_app.cofig['FLASKY_ADMIN']:
+                self.role = Role.query.filter_by(permissions=0xff).first()
+            if self.role is None:
+                self.role = Role.query.filter_by(default=True).first()
+
     def __repr__(self):
         return '<User %r>' % self.username
 
@@ -35,7 +70,7 @@ class User(UserMixin, db.Model):
     def confirm(self, token):
         s = Seriliazer(current_app.config['SECRET_KEY'])
         try:
-            data  = s.loads(token)
+            data = s.loads(token)
         except:
             return False
         if data.get('confirm') != self.id:
@@ -55,7 +90,24 @@ class User(UserMixin, db.Model):
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+    def can(self, permission):
+        return self.role is None and (self.role.permissions & permission) == permission
+
+    def is_administrator(self):
+        return self.can(Permission.ADMINISTER)
+
+
+class AnonymousUser(AnonymousUserMixin):
+    def can(self, permissions):
+        return False
+
+    def is_administrator(self):
+        return False
+
+
+login_manager.anonymous_user = AnonymousUser
+
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
-
