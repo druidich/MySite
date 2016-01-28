@@ -1,5 +1,5 @@
 from flask.ext.wtf import Form
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
 from wtforms.validators import Required, Email, Length, Regexp, EqualTo
 from wtforms import ValidationError
 from ..model import User
@@ -27,3 +27,9 @@ class RegistrationForm(Form):
     def validate_username(self, field):
         if User.query.filter_by(username=field.data).first():
             raise ValidationError('User name is use.')
+
+class EditProfileForm(Form):
+    name = StringField('Real name', validators=[Length(0,64)])
+    location = StringField('Location', validators=[Length(0,64)])
+    about_me = TextAreaField('About me')
+    submit = SubmitField('Submit')

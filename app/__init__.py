@@ -25,11 +25,12 @@ def create_app(configname):
     mail.init_app(app)
     moment.init_app(app)
 
-    from app.main import main as main_blueprint
+    from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
+
     login_manager.init_app(app)
 
     return app

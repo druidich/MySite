@@ -57,8 +57,8 @@ class User(UserMixin, db.Model):
     name = db.Column(db.String(64))
     location = db.Column(db.String(64))
     about_me = db.Column(db.String(64))
-    member_since = db.Column(db.DateTime(), default=datetime.utcnow)
-    last_seen = db.Column(db.DateTime(), default=datetime.utcnow)
+    member_since = db.Column(db.DateTime(), default=datetime.utcnow())
+    last_seen = db.Column(db.DateTime(), default=datetime.utcnow())
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
@@ -99,7 +99,7 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
 
     def can(self, permission):
-        return self.role is None and (self.role.permissions & permission) == permission
+        return self.role is not None and (self.role.permissions & permission) == permission
 
     def is_administrator(self):
         return self.can(Permission.ADMINISTER)
