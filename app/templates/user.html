@@ -2,6 +2,7 @@
 
 {% block title %} Flasky - {{ user.username }}{% endblock %}
 {% block page_content %}
+    <img class="img-rounded profile-thumbnail" src="{{ user.gravatar(size=256) }}">
     <div class="page-header">
         <h1>{{ user.username }}</h1>
         {% if user.name or user.location %}
@@ -15,7 +16,10 @@
             </p>
         {% endif %}
         {% if current_user.is_administrator() %}
-            <p><a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+            <a class="btn btn-danger"
+               href="{{ url_for('.edit_profile_admin', id=user.id) }}">
+                Edit Profile [Admin]
+            </a>
         {% endif %}
         {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
         <p>
@@ -29,4 +33,7 @@
             Edit Profile
         </a>
     {% endif %}
+
+    <h3>Post by {{ user.username }}</h3>
+    {% include '_posts.html' %}
 {% endblock %}
