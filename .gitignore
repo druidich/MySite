@@ -1,0 +1,25 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gitignore
+.idea/.name
+.idea/MySite.iml
+.idea/dataSources.ids
+.idea/dataSources.local.xml
+.idea/dataSources/
+.idea/deployment.xml
+.idea/encodings.xml
+.idea/inspectionProfiles/
+.idea/jsLibraryMappings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/sqldialects.xml
+.idea/webServers.xml
+.idea/workspace.xml
+__pycache__/
+app/__pycache__/
+app/api/__pycache__/
+app/auth/__pycache__/
+app/main/__pycache__/
+app/static/a.jpg
+app/static/bootstrap/
+data.db
+migrations/
