@@ -1,15 +1,12 @@
-from flask import Flask, render_template
-from flask.ext.sqlalchemy import SQLAlchemy
-from flask.ext.bootstrap import Bootstrap
-from flask.ext.moment import Moment
-from flask.ext.script import Manager
-from flask.ext.mail import Mail
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_moment import Moment
+from flask_mail import Mail
 from config import config
-from flask.ext.login import LoginManager
-from flask.ext.pagedown import PageDown
+from flask_login import LoginManager
+from flask_pagedown import PageDown
 
 db = SQLAlchemy()
-bootstrap = Bootstrap()
 moment = Moment()
 mail = Mail()
 login_manager = LoginManager()
@@ -23,7 +20,7 @@ def create_app(configname):
     app.config.from_object(config[configname])
     config[configname].init_app(app)
     db.init_app(app)
-    bootstrap.init_app(app)
+    # bootstrap.init_app(app)
     mail.init_app(app)
     moment.init_app(app)
     pagedown.init_app(app)
@@ -36,6 +33,9 @@ def create_app(configname):
 
     from .api import api as api_blueprint
     app.register_blueprint(api_blueprint, url_prefix='/api/v1.0')
+
+    from .admin import admin
+    app.register_blueprint(admin, url_prefix='/admin')
 
     login_manager.init_app(app)
 

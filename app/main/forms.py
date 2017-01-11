@@ -1,12 +1,12 @@
-from flask.ext.wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, BooleanField, SelectField, TextAreaField
 from wtforms.validators import Required, Length, Email, Regexp
 from wtforms import ValidationError
 
 from app.model import Role, User
-from flask.ext.pagedown.fields import PageDownField
+from flask_pagedown.fields import PageDownField
 
-class EditProfileAdminForm(Form):
+class EditProfileAdminForm(FlaskForm):
     email = StringField('Email', validators=[Required(), Length(1, 64), Email()])
     username = StringField('Username', validators=[Required(), Length(1, 64), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
                                                                                      'Usernames must have only letters, numbers, dots or underscores')])
@@ -33,10 +33,10 @@ class EditProfileAdminForm(Form):
             raise ValidationError('Username alredy in use')
 
 
-class PostForm(Form):
+class PostForm(FlaskForm):
     body = PageDownField("What's on your mind ?", validators=[Required()])
     submit = SubmitField('Submit')
 
-class CommentForm(Form):
+class CommentForm(FlaskForm):
     body = StringField('', validators=[Required()])
     submit = SubmitField('Submit')

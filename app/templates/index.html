@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
+{% import "macros.html" as wtf %}
+{# {% imort "bootstrap/wtf.html" as wtf %}#}
 {% import "_macros.html" as macros %}
 
 {% block title %}Flasky{% endblock %}
@@ -29,8 +30,8 @@
         </div>
     {% endif %}
 {% endblock %}
-
-{% block scripts %}
-    {{ super() }}
-    {{ pagedown.include_pagedown() }}
-{% endblock %}
+{##}
+{#{% block scripts %}#}
+{#    {{ super() }}#}
+{#    {{ pagedown.include_pagedown() }}#}
+{#{% endblock %}#}

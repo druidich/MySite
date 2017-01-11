@@ -1,11 +1,9 @@
 from datetime import datetime
-
 from pytz import lazy
 from app.exceptions import ValidationError
-
 from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask.ext.login import UserMixin, AnonymousUserMixin
+from flask_login import UserMixin, AnonymousUserMixin
 from flask import current_app, url_for
 from app import login_manager
 from itsdangerous import TimedJSONWebSignatureSerializer as Seriliazer, Serializer
@@ -13,7 +11,6 @@ import hashlib
 from flask import request
 from markdown import markdown
 import bleach
-
 
 class Permission:
     FOLLOW = 0x01
@@ -28,7 +25,6 @@ class Follow(db.Model):
     follower_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
     followed_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow())
-
 
 class Role(db.Model):
     __tablename__ = 'roles'
