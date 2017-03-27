@@ -5,10 +5,12 @@ from flask_mail import Mail
 from config import config
 from flask_login import LoginManager
 from flask_pagedown import PageDown
+from flask_bootstrap import Bootstrap
 
 db = SQLAlchemy()
 moment = Moment()
 mail = Mail()
+bootstrap = Bootstrap()
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'auth/login'
@@ -20,7 +22,7 @@ def create_app(configname):
     app.config.from_object(config[configname])
     config[configname].init_app(app)
     db.init_app(app)
-    # bootstrap.init_app(app)
+    bootstrap.init_app(app)
     mail.init_app(app)
     moment.init_app(app)
     pagedown.init_app(app)
