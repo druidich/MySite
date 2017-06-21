@@ -131,7 +131,7 @@ def edit(id):
         post.body = form.body.data
         db.session.add(post)
         flash('The post has been update')
-        return redirect(url_for('post', id=post.id))
+        return redirect(url_for('main.post', id=post.id))
     form.body.data = post.body
     return render_template('edit_post.html', form=form)
 
