@@ -2,64 +2,558 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-theme.css">
-    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script src="../static/bootstrap/js/jquery.min.js"></script>
+    {#    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-theme.css">#}
+{#    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css">#}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}">
+{#    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">#}
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='swipe.css') }}">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Home Page</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,700,300,600,800,400'
+          rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic'
+          rel='stylesheet' type='text/css'>
+
 </head>
 
 
 <body>
-{% block navbar %}
-    <div class="navbar navbar-inverse" role="navigation">
-        <div class="container">
-
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{{ url_for('main.index') }}">Flasky</a>
+<!-- header-section-starts -->
+<div class="header" id="home">
+    <div class="container">
+        <div class="header-top">
+            <div class="logo">
+                <a href="index.html"><img src="{{ url_for('static', filename='image/logo.png') }}" alt=""/></a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="/">Home</a></li>
-                    {% if current_user.is_authenticated %}
-                        <li><a href="{{ url_for('main.user', username=current_user.username) }}">Profile</a></li>
-                    {% endif %}
+            <div class="top-menu">
+                <span class="menu"> </span>
+                <ul>
+                    <li><a class="active scroll" href="#home">Home</a></li>
+                    <li><a class="scroll" href="#about">About</a></li>
+                    <li><a class="scroll" href="#services">Services</a></li>
+                    <li><a class="scroll" href="#portfolio">Portfolio</a></li>
+                    <li><a class="scroll" href="#blog">Blog</a></li>
+                    <li><a class="scroll" href="#shortcodes">Shortcodes</a></li>
+                    <li><a class="scroll" href="#contact">Contact</a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    {% if current_user.can(Permission.MODERATE_COMMENT) %}
-                        <li><a href="{{ url_for('main.moderate') }}">Moderate Comments</a></li>
-                    {% endif %}
-                    {% if current_user.is_authenticated %}
-                        <li><a href="{{ url_for('auth.logout') }}">Sign Out</a></li>
-                    {% else %}
-                        <li><a href="{{ url_for('auth.login') }}">Sign In</a></li>
-                    {% endif %}
-                </ul>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!---start-color-changer----->
+        <div id="colorchanger">
+            <a class="colorbox colorblue" href="?theme=blue" title="blue Theme"> </a>
+            <a class="colorbox colorrose" href="?theme=rose" title="rose Theme"> </a>
+            <a class="colorbox colorgreen" href="?theme=green" title="green Theme"> </a>
+        </div>
+        <!---//End-color-changer----->
+        <div class="header-info text-center">
+            <h1>WHAT IS PIONEER ?</h1>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s</p>
+            <a class="scroll" href="#services"><img src="{{ url_for('static', filename='image/go_down.png') }}" alt=""/></a>
+        </div>
+    </div>
+</div>
+<div class="main-part">
+    <div class="services-section" id="services">
+        <div class="container">
+            <div class="services-section-head text-center">
+                <h3>SERVICES</h3>
+            </div>
+            <div class="services-section-grids">
+                <div class="col-md-4 services-section-grid">
+                    <div class="services-section-grid-head">
+                        <div class="service-icon">
+                            <i class="event"></i>
+                        </div>
+                        <div class="service-icon-heading">
+                            <h4>Events Planning</h4>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book. </p>
+                </div>
+                <div class="col-md-4 services-section-grid">
+                    <div class="services-section-grid-head">
+                        <div class="service-icon">
+                            <i class="needs"></i>
+                        </div>
+                        <div class="service-icon-heading">
+                            <h4>Needs Analysis</h4>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book. </p>
+                </div>
+                <div class="col-md-4 services-section-grid">
+                    <div class="services-section-grid-head">
+                        <div class="service-icon">
+                            <i class="gender"></i>
+                        </div>
+                        <div class="service-icon-heading">
+                            <h4>Gender Sensitization</h4>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book. </p>
+                </div>
+                <div class="col-md-4 services-section-grid">
+                    <div class="services-section-grid-head">
+                        <div class="service-icon">
+                            <i class="photo"></i>
+                        </div>
+                        <div class="service-icon-heading">
+                            <h4>Photography</h4>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book. </p>
+                </div>
+                <div class="col-md-4 services-section-grid">
+                    <div class="services-section-grid-head">
+                        <div class="service-icon">
+                            <i class="education"></i>
+                        </div>
+                        <div class="service-icon-heading">
+                            <h4>Education</h4>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book. </p>
+                </div>
+                <div class="col-md-4 services-section-grid">
+                    <div class="services-section-grid-head">
+                        <div class="service-icon">
+                            <i class="project"></i>
+                        </div>
+                        <div class="service-icon-heading">
+                            <h4>Project Management</h4>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book. </p>
+                </div>
+                <div class="clearfix"></div>
             </div>
         </div>
     </div>
-{% endblock %}
-{% block content %}
-    <div class="container">
-        {% for message in get_flashed_messages() %}
-            <div class="alert alert-warning">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                {{ message }}
-            </div>
-        {% endfor %}
-        {% block page_content %}
+    <div class="projects-section" id="portfolio">
+        <div class="projects-section-head text-center">
+            <h3>PROJECTS</h3>
+        </div>
+        <ul id="filters" class="clearfix">
+            <li><span class="filter active" data-filter="app card icon logos web">ALL</span></li>
+            <li><span class="filter" data-filter="app">Photography</span></li>
+            <li><span class="filter" data-filter="card">Events</span></li>
+            <li><span class="filter" data-filter="icon">Design</span></li>
+            <li><span class="filter" data-filter="logos">Projects</span></li>
+        </ul>
+        <div id="portfoliolist">
+            <div class="portfolio card mix_all  wow bounceIn" data-wow-delay="0.4s" data-cat="card"
+                 style="display: inline-block; opacity: 1;">
+                <div class="portfolio-wrapper grid_box">
+                    <a href="images/pic-1.jpg" class="swipebox" title="Image Title"> <img
+                            src="{{ url_for('static', filename='image/pic-1.jpg') }}"
+                            class="img-responsive" alt=""><span
+                            class="zoom-icon"></span> </a>
 
-        {% endblock %}
+                </div>
+            </div>
+            <div class="portfolio app mix_all  wow bounceIn" data-wow-delay="0.4s" data-cat="app"
+                 style="display: inline-block; opacity: 1;">
+                <div class="portfolio-wrapper grid_box">
+                    <a href="images/pic-2.jpg" class="swipebox" title="Image Title"> <img
+                            src="{{ url_for('static', filename='image/pic-2.jpg') }}"
+                            class="img-responsive" alt=""><span
+                            class="zoom-icon"></span> </a>
+
+                </div>
+            </div>
+            <div class="portfolio icon mix_all  wow bounceIn" data-wow-delay="0.4s" data-cat="icon"
+                 style="display: inline-block; opacity: 1;">
+                <div class="portfolio-wrapper grid_box">
+                    <a href="images/pic-3.jpg" class="swipebox" title="Image Title"> <img
+                            src="{{ url_for('static', filename='image/pic-3.jpg') }}"
+                            class="img-responsive" alt=""><span
+                            class="zoom-icon"></span> </a>
+
+                </div>
+
+            </div>
+
+            <div class="portfolio app mix_all  wow bounceIn" data-wow-delay="0.4s" data-cat="app"
+                 style="display: inline-block; opacity: 1;">
+                <div class="portfolio-wrapper grid_box">
+                    <a href="images/pic-4.jpg" class="swipebox" title="Image Title"> <img
+                            src="{{ url_for('static', filename='image/pic-4.jpg') }}"
+                            class="img-responsive" alt=""><span
+                            class="zoom-icon"></span> </a>
+
+                </div>
+            </div>
+            <div class="portfolio card mix_all  wow bounceIn" data-wow-delay="0.4s" data-cat="card"
+                 style="display: inline-block; opacity: 1;">
+                <div class="portfolio-wrapper grid_box">
+                    <a href="images/pic-5.jpg" class="swipebox" title="Image Title"> <img
+                            src="{{ url_for('static', filename='image/pic-5.jpg') }}"
+                            class="img-responsive" alt=""><span
+                            class="zoom-icon"></span> </a>
+
+                </div>
+            </div>
+            <div class="portfolio card mix_all  wow bounceIn" data-wow-delay="0.4s" data-cat="card"
+                 style="display: inline-block; opacity: 1;">
+                <div class="portfolio-wrapper grid_box">
+                    <a href="images/pic-6.jpg" class="swipebox" title="Image Title"> <img
+                            src="{{ url_for('static', filename='image/pic-6.jpg') }}"
+                            class="img-responsive" alt=""><span
+                            class="zoom-icon"></span> </a>
+
+                </div>
+            </div>
+            <div class="portfolio icon mix_all  wow bounceIn" data-wow-delay="0.4s" data-cat="icon"
+                 style="display: inline-block; opacity: 1;">
+                <div class="portfolio-wrapper grid_box">
+                    <a href="images/pic-7.jpg" class="swipebox" title="Image Title"> <img
+                            src="{{ url_for('static', filename='image/pic-7.jpg') }}"
+                            class="img-responsive" alt=""><span
+                            class="zoom-icon"></span> </a>
+
+                </div>
+            </div>
+            <div class="portfolio logos mix_all wow bounceIn" data-wow-delay="0.4s" data-cat="logos"
+                 style="display: inline-block; opacity: 1;">
+                <div class="portfolio-wrapper grid_box">
+                    <a href="images/pic-8.jpg" class="swipebox" title="Image Title"> <img
+                            src="{{ url_for('static', filename='image/pic-8.jpg') }}"
+                            class="img-responsive" alt=""><span
+                            class="zoom-icon"></span> </a>
+
+                </div>
+            </div>
+            <div class="portfolio logos mix_all wow bounceIn" data-wow-delay="0.4s" data-cat="logos"
+                 style="display: inline-block; opacity: 1;">
+                <div class="portfolio-wrapper grid_box">
+                    <a href="images/pic-9.jpg" class="swipebox" title="Image Title"> <img
+                            src="{{ url_for('static', filename='image/pic-9.jpg') }}"
+                            class="img-responsive" alt=""><span
+                            class="zoom-icon"></span> </a>
+
+                </div>
+            </div>
+            <div class="portfolio app mix_all  wow bounceIn" data-wow-delay="0.4s" data-cat="app"
+                 style="display: inline-block; opacity: 1;">
+                <div class="portfolio-wrapper grid_box">
+                    <a href="images/pic-10.jpg" class="swipebox" title="Image Title"> <img
+                            src="{{ url_for('static', filename='image/pic-10.jpg') }}"
+                            class="img-responsive"
+                            alt=""><span
+                            class="zoom-icon"></span> </a>
+
+                </div>
+            </div>
+            <div class="portfolio icon mix_all  wow bounceIn" data-wow-delay="0.4s" data-cat="icon"
+                 style="display: inline-block; opacity: 1;">
+                <div class="portfolio-wrapper grid_box">
+                    <a href="images/pic-11.jpg" class="swipebox" title="Image Title"> <img
+                            src="{{ url_for('static', filename='image/pic-11.jpg') }}"
+                            class="img-responsive"
+                            alt=""><span
+                            class="zoom-icon"></span> </a>
+
+                </div>
+            </div>
+            <div class="portfolio card mix_all  wow bounceIn" data-wow-delay="0.4s" data-cat="card"
+                 style="display: inline-block; opacity: 1;">
+                <div class="portfolio-wrapper grid_box">
+                    <a href="images/pic-12.jpg" class="swipebox" title="Image Title"> <img
+                            src="{{ url_for('static', filename='image/pic-12.jpg') }}"
+                            class="img-responsive"
+                            alt=""><span
+                            class="zoom-icon"></span> </a>
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
     </div>
-{% endblock %}
+    <div class="about-section" id="about">
+        <div class="about-top">
+            <div class="container">
+                <div class="col-md-3 about-grid text-center">
+                    <i class="volunteer"></i>
+                    <h5>+942 volunteers</h5>
+                </div>
+                <div class="col-md-3 about-grid text-center">
+                    <i class="idea"></i>
+                    <h5>+79 Ideas</h5>
+                </div>
+                <div class="col-md-3 about-grid text-center">
+                    <i class="projects"></i>
+                    <h5>+726 projects</h5>
+                </div>
+                <div class="col-md-3 about-grid text-center">
+                    <i class="work"></i>
+                    <h5>+327 workshops</h5>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="our-team">
+            <div class="container">
+                <div class="our-team-head text-center">
+                    <h3>OUR TEAM</h3>
+                </div>
+                <div class="our-team-grids">
+                    <div class="col-md-3 our-team-grid text-center">
+                        <img src="{{ url_for('static', filename='image/team_pic_1.jpg') }}" alt=""/>
+                        <h5>Francis Underwood</h5>
+                        <p>CEO</p>
+                        <div class="abt_social_icons">
+                            <a href="#"><i class="abt_facebook"></i></a>
+                            <a href="#"><i class="abt_twitter"></i></a>
+                            <a href="#"><i class="abt_googlepluse"></i></a>
+                            <a href="#"><i class="abt_linkedin"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 our-team-grid text-center">
+                        <img src="{{ url_for('static', filename='image/team_pic_2.JPG') }}" alt=""/>
+                        <h5>Francis Underwood</h5>
+                        <p>CEO</p>
+                        <div class="abt_social_icons">
+                            <a href="#"><i class="abt_facebook"></i></a>
+                            <a href="#"><i class="abt_twitter"></i></a>
+                            <a href="#"><i class="abt_googlepluse"></i></a>
+                            <a href="#"><i class="abt_linkedin"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 our-team-grid text-center">
+                        <img src="{{ url_for('static', filename='image/team_pic_3.JPG') }}" alt=""/>
+                        <h5>Francis Underwood</h5>
+                        <p>CEO</p>
+                        <div class="abt_social_icons">
+                            <a href="#"><i class="abt_facebook"></i></a>
+                            <a href="#"><i class="abt_twitter"></i></a>
+                            <a href="#"><i class="abt_googlepluse"></i></a>
+                            <a href="#"><i class="abt_linkedin"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 our-team-grid text-center">
+                        <img src="{{ url_for('static', filename='image/team_pic_4.JPG') }}" alt=""/>
+                        <h5>Francis Underwood</h5>
+                        <p>CEO</p>
+                        <div class="abt_social_icons">
+                            <a href="#"><i class="abt_facebook"></i></a>
+                            <a href="#"><i class="abt_twitter"></i></a>
+                            <a href="#"><i class="abt_googlepluse"></i></a>
+                            <a href="#"><i class="abt_linkedin"></i></a>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="subscribe text-center" id="shortcodes">
+        <div class="container">
+            <h3>SUBSCRIBE TO OUR NEWSLETTER</h3>
+            <input type="text" class="text" value="YOUR MAIL ADDRESS" onfocus="this.value = '';"
+                   onblur="if (this.value == '') {this.value = 'YOUR MAIL ADDRESS';}">
+            <input type="submit" value="Subscribe">
+        </div>
+    </div>
+
+    <div class="clients">
+        <div class="container">
+            <ul>
+                <li><a href="#"><img src="{{ url_for('static', filename='image/behance.jpg') }}" alt=""/></a></li>
+                <li><a href="#"><img src="{{ url_for('static', filename='image/drop.jpg') }}" alt=""/></a></li>
+                <li><a href="#"><img src="{{ url_for('static', filename='image/row.jpg') }}" alt=""/></a></li>
+                <li><a href="#"><img src="{{ url_for('static', filename='image/facebook.jpg') }}" alt=""/></a></li>
+                <li><a href="#"><img src="{{ url_for('static', filename='image/microsoft.jpg') }}" alt=""/></a></li>
+                <li><a href="#"><img src="{{ url_for('static', filename='image/dell.jpg') }}" alt=""/></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="blog-section" id="blog">
+        <div class="container">
+            <div class="blog-section-head text-center">
+                <h3>FROM OUR BLOG</h3>
+            </div>
+            <div class="blog-section-grids">
+                <div class="col-md-4 blog-section-grid">
+                    <div class="date">
+                        <p>17</p>
+                        <p>MAY</p>
+                    </div>
+                    <img src="{{ url_for('static', filename='image/blog_pic_1.jpg') }}" alt=""/>
+                    <h4 class="text-center">First Blog Post Title</h4>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book.</p>
+                    <a href="#">Read More</a>
+                </div>
+                <div class="col-md-4 blog-section-grid">
+                    <div class="date">
+                        <p>13</p>
+                        <p>MAY</p>
+                    </div>
+                    <img src="{{ url_for('static', filename='image/blog_pic_2.jpg') }}" alt=""/>
+                    <h4 class="text-center">Secound Blog Post Title</h4>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book. </p>
+                    <a href="#">Read More</a>
+                </div>
+                <div class="col-md-4 blog-section-grid">
+                    <div class="date">
+                        <p>27</p>
+                        <p>MAR</p>
+                    </div>
+                    <img src="{{ url_for('static', filename='image/blog_pic_3.jpg') }}" alt=""/>
+                    <h4 class="text-center">Third Blog Post Title</h4>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book.</p>
+                    <a href="#">Read More</a>
+                </div>
+                <div class="col-md-4 blog-section-grid">
+                    <div class="date">
+                        <p>20</p>
+                        <p>MAR</p>
+                    </div>
+                    <img src="{{ url_for('static', filename='image/blog_pic_4.jpg') }}" alt=""/>
+                    <h4 class="text-center">Fourth Blog Post Title</h4>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book.</p>
+                    <a href="#">Read More</a>
+                </div>
+                <div class="col-md-4 blog-section-grid">
+                    <div class="date">
+                        <p>23</p>
+                        <p>FEb</p>
+                    </div>
+                    <img src="{{ url_for('static', filename='image/blog_pic_5.jpg') }}" alt=""/>
+                    <h4 class="text-center">Fifth Blog Post Title</h4>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book.</p>
+                    <a href="#">Read More</a>
+                </div>
+                <div class="col-md-4 blog-section-grid">
+                    <div class="date">
+                        <p>30</p>
+                        <p>JAN</p>
+                    </div>
+                    <img src="{{ url_for('static', filename='image/blog_pic_6.jpg') }}" alt=""/>
+                    <h4 class="text-center">Sixth Blog Post Title</h4>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book.</p>
+                    <a href="#">Read More</a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="social-icons">
+        <div class="container">
+            <a href="#"><i class="f_facebook"></i></a>
+            <a href="#"><i class="f_youtube"></i></a>
+            <a href="#"><i class="f_linkedin"></i></a>
+            <a href="#"><i class="f_pinterest"></i></a>
+            <a href="#"><i class="f_behance"></i></a>
+            <a href="#"><i class="f_googlepluse"></i></a>
+            <a href="#"><i class="f_rss"></i></a>
+            <a href="#"><i class="f_tumbler"></i></a>
+            <a href="#"><i class="f_instagram"></i></a>
+            <a href="#"><i class="f_dribble"></i></a>
+            <a href="#"><i class="f_mail"></i></a>
+        </div>
+    </div>
+    <div class="footer-top">
+        <div class="container">
+            <div class="col-md-3 footer-grid">
+                <h4>About Us</h4>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                    and scrambled it to make a type specimen book.</p>
+            </div>
+            <div class="col-md-3 footer-grid">
+                <h4>Useful Links</h4>
+                <ul>
+                    <li><a href="#">- Author Page</a></li>
+                    <li><a href="#">- FAQ</a></li>
+                    <li><a href="#">- Terms of Use</a></li>
+                    <li><a href="#">- Donate</a></li>
+                    <li><a href="#">- Help Center</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 footer-grid">
+                <h4>Contact Us</h4>
+                <ul class="address">
+                    <li><i class="f_phone"></i></li>
+                    <li>0123456789</li>
+                </ul>
+                <ul class="address">
+                    <li><i class="f_msg"></i></li>
+                    <li><a href="example@mail.com"> Verbal@gmail.com</a></li>
+                </ul>
+                <ul class="address">
+                    <li><i class="f_location"></i></li>
+                    <li>10th Makram ebidRoad , <br>5th District,Nasr City,Cairo,Egypt</li>
+                </ul>
+            </div>
+            <div class="col-md-3 footer-grid">
+                <h4>Flicker</h4>
+                <ul class="flkr">
+                    <li><img src="{{ url_for('static', filename='image/f1.jpg') }}" alt=""/ ></li>
+                    <li><img src="{{ url_for('static', filename='image/f2.jpg') }}" alt=""/ ></li>
+                    <li><img src="{{ url_for('static', filename='image/f3.jpg') }}" alt=""/ ></li>
+                    <li><img src="{{ url_for('static', filename='image/f4.jpg') }}" alt=""/ ></li>
+                    <li><img src="{{ url_for('static', filename='image/f5.jpg') }}" alt=""/ ></li>
+                    <li><img src="{{ url_for('static', filename='image/f6.jpg') }}" alt=""/ ></li>
+                    <li><img src="{{ url_for('static', filename='image/f7.jpg') }}" alt=""/ ></li>
+                    <li><img src="{{ url_for('static', filename='image/f8.jpg') }}" alt=""/ ></li>
+                    <li><img src="{{ url_for('static', filename='image/f9.jpg') }}" alt=""/ ></li>
+                    <li><img src="{{ url_for('static', filename='image/f10.jpg') }}" alt=""/ ></li>
+                    <li><img src="{{ url_for('static', filename='image/f11.jpg') }}" alt=""/ ></li>
+                    <li><img src="{{ url_for('static', filename='image/f12.jpg') }}" alt=""/ ></li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="copyright text-center">
+                <p>Copyright &copy; 2015 All rights reserved | Template by <a href="http://w3layouts.com"> W3layouts</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="../static/bootstrap/js/bootstrap.js"></script>
 </body>
 </html>
